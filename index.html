@@ -91,6 +91,15 @@ draw();new MutationObserver(draw).observe(get('bets'),{childList:true});window.a
 (function(){
 const key='betting-hq-props-v1',el=id=>document.getElementById(id);
 let props=[];try{const saved=JSON.parse(localStorage.getItem(key));if(Array.isArray(saved))props=saved;}catch(e){}
+const todayProps=[
+{id:'cfb-20261010-shipp',player:'J. Shipp (UNC)',event:'UNC · Oct 10',sport:'Football',stat:'Receiving yards',side:'Over',line:'60.5',stake:'',payout:'',current:93,status:'Won'},
+{id:'cfb-20261010-patterson',player:'J. Patterson (MST)',event:'MST · Oct 10',sport:'Football',stat:'Rushing yards',side:'Under',line:'74.5',stake:'',payout:'',current:null,status:'Pending'},
+{id:'cfb-20261010-clement',player:'H. Clement (Illinois)',event:'Illinois · Oct 10',sport:'Football',stat:'Receiving yards',side:'Over',line:'50.5',stake:'',payout:'',current:null,status:'Pending'},
+{id:'cfb-20261010-taylor',player:'D. Taylor (Minnesota)',event:'Minnesota · Oct 10',sport:'Football',stat:'Rushing yards',side:'Under',line:'68.5',stake:'',payout:'',current:null,status:'Pending'},
+{id:'cfb-20261010-middlebrook',player:'J. Middlebrook (Virginia)',event:'Virginia · Oct 10',sport:'Football',stat:'Rushing yards',side:'Under',line:'81.5',stake:'',payout:'',current:null,status:'Pending'},
+{id:'cfb-20261010-manning',player:'A. Manning (Texas)',event:'Texas · Oct 10',sport:'Football',stat:'Passing yards',side:'Under',line:'210.5',stake:'',payout:'',current:null,status:'Pending'}
+];
+let seeded=false;for(const p of todayProps){if(!props.some(x=>x.id===p.id)){props.push(p);seeded=true;}}if(seeded){try{localStorage.setItem(key,JSON.stringify(props));}catch(e){}}
 const escapeHtml=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=v=>'
 +Number(v||0).toFixed(2);
